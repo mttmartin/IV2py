@@ -1,33 +1,14 @@
+#include "record_reader.h"
+
 #include <ivio/ivio.h>
 #include <pybind11/pybind11.h>
-#include <ranges>
-
-template <typename reader>
-struct record_reader {
-    reader reader_;
-
-    record_reader(std::string const& path)
-        : reader_{{path}}
-    {}
-
-    using record_view = typename reader::record_view;
-    using record      = typename reader::record;
-
-    static auto init(reader& reader_) {
-        return reader_ | std::views::transform([](record_view v) -> record {
-            return v;
-        });
-    }
-    decltype(init(reader_)) view = init(reader_);
-};
 
 namespace py = pybind11;
-PYBIND11_MODULE(ivpy, mod) {
-
-    py::module mod_fasta = mod.def_submodule("fasta");
+void init_fasta_mod(py::module& parent_mod) {
+    auto mod = parent_mod.def_submodule("fasta");
 
     // Provding the record class
-    py::class_<ivio::fasta::record>(mod_fasta, "record")
+    py::class_<ivio::fasta::record>(mod, "record")
         .def(py::init<>([](std::string id, std::string seq) {
             return ivio::fasta::record {
                 .id  = std::move(id),
@@ -42,7 +23,7 @@ PYBIND11_MODULE(ivpy, mod) {
     ;
 
     // Providing the reader class
-    py::class_<record_reader<ivio::fasta::reader>>(mod_fasta, "reader")
+    py::class_<record_reader<ivio::fasta::reader>>(mod, "reader")
         .def(py::init([](std::string const& path) {
             return std::make_unique<record_reader<ivio::fasta::reader>>(path);
         }), py::arg("file"))
@@ -52,7 +33,7 @@ PYBIND11_MODULE(ivpy, mod) {
     ;
 
     // Providing the writer class
-    py::class_<ivio::fasta::writer>(mod_fasta, "writer")
+    py::class_<ivio::fasta::writer>(mod, "writer")
         .def(py::init([](std::string const& path) {
             return std::make_unique<ivio::fasta::writer>(ivio::fasta::writer::config{path});
         }), py::arg("file"))
@@ -63,6 +44,4 @@ PYBIND11_MODULE(ivpy, mod) {
             writer.close();
         })
     ;
-
-
 }
