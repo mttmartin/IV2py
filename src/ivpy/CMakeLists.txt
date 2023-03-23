@@ -3,5 +3,6 @@ project(ivpy LANGUAGES CXX)
 
 pybind11_add_module(ivpy MODULE
     main.cpp
-    fasta.cpp)
+    fasta.cpp
+    sam.cpp)
 target_link_libraries(ivpy PRIVATE ivio::ivio)

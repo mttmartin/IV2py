@@ -6,6 +6,7 @@ The goal is to cover typical functionality for **bioinformatics**.
 ## Support
 
  - **fasta** (rw) + **gzip** (rw)
+ - **sam** (rw)
 
 (description - rw: read/write, ro: read-only)
 
@@ -44,4 +45,7 @@ Following classes are currently available:
   + `ivpy.fasta.record`
   + `ivpy.fasta.reader`
   + `ivpy.fasta.writer`
+  + `ivpy.sam.record`
+  + `ivpy.sam.reader`
+  + `ivpy.sam.writer`
 
