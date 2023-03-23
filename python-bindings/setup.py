@@ -123,7 +123,7 @@ class CMakeBuild(build_ext):
         )
 
 setup(
-    name='ivpy',
-    ext_modules=[CMakeExtension("ivpy", "..")],
+    name='iv_py',
+    ext_modules=[CMakeExtension("iv_py", "..")],
     cmdclass={"build_ext": CMakeBuild},
 )

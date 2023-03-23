@@ -1,10 +1,10 @@
 [project]
-name = "ivpy"
+name = "iv2py"
 version = "0.3.0"
 authors = [
-  { name="Simon Gene Gottlieb", email="ivpy.simon@gottliebtfreitag.de" },
+  { name="Simon Gene Gottlieb", email="iv2py.simon@gottliebtfreitag.de" },
 ]
-description = "IVpy bioinformatic utilities"
+description = "IV2py bioinformatic utilities"
 requires-python = ">=3.7"
 classifiers = [
     "Development Status :: 4 - Beta",
@@ -14,4 +14,4 @@ classifiers = [
 ]
 
 [project.urls]
-"Homepage" = "https://github.com/SGSSGene/IVpy"
+"Homepage" = "https://github.com/SGSSGene/IV2py"

@@ -7,7 +7,7 @@ namespace py = pybind11;
 void init_fasta_mod(py::module& parent_mod) {
     auto mod = parent_mod.def_submodule("fasta");
 
-    // Provding the record class
+    // Providing the record class
     py::class_<ivio::fasta::record>(mod, "record")
         .def(py::init<>([](std::string id, std::string seq) {
             return ivio::fasta::record {
@@ -18,7 +18,7 @@ void init_fasta_mod(py::module& parent_mod) {
         .def_readwrite("id", &ivio::fasta::record::id)
         .def_readwrite("seq", &ivio::fasta::record::seq)
         .def("__repr__", [](ivio::fasta::record const& o) -> std::string {
-            return "<ivpy.fasta.record id '" + o.id + "', seq '" + std::string{o.seq} + "'>";
+            return "<iv2py.fasta.record id '" + o.id + "', seq '" + std::string{o.seq} + "'>";
         })
     ;
 

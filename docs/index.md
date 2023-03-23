@@ -1,6 +1,6 @@
 # Introduction
 
-**IVpy** provides python bindings for **IVio**.
+**IV2py** provides python bindings for **IVio**.
 The goal is to cover typical functionality for **bioinformatics**.
 
 ## Support
@@ -14,26 +14,26 @@ The goal is to cover typical functionality for **bioinformatics**.
 
 ## Usage
 
-For python we have a package called **ivpy**.
-This can be easily installed via `pip install ivpy`.
+For python we have a package called **iv2py**.
+This can be easily installed via `pip install iv2py`.
 
 
 Here an example of reading a fasta file:
 ```python
-import ivpy
+import iv2py as iv
 
-for record in ivpy.fasta.reader(file='file.fa'):
+for record in iv.fasta.reader(file='file.fa'):
     print(record.id)
     print(record.seq)
 ```
 
 To write a fasta file, each record has to be provided as a fasta::record
 ```python
-import ivpy
+import iv2py as iv
 
-record = ivpy.fasta.record(id="my id", seq="somesequence")
+record = iv.fasta.record(id="my id", seq="somesequence")
 
-writer = ivpy.fasta.writer(file='file.fa')
+writer = iv.fasta.writer(file='file.fa')
 writer.write(record)
 writer.close()
 ```
@@ -42,10 +42,10 @@ writer.close()
 ## API Reference
 Following classes are currently available:
 
-  + `ivpy.fasta.record`
-  + `ivpy.fasta.reader`
-  + `ivpy.fasta.writer`
-  + `ivpy.sam.record`
-  + `ivpy.sam.reader`
-  + `ivpy.sam.writer`
+  + `iv2py.fasta.record`
+  + `iv2py.fasta.reader`
+  + `iv2py.fasta.writer`
+  + `iv2py.sam.record`
+  + `iv2py.sam.reader`
+  + `iv2py.sam.writer`
 

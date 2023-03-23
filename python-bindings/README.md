@@ -1,4 +1,4 @@
-# ivpy
+# IV2py
 
 This folder helps creating libraries for python.
 

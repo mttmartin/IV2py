@@ -61,7 +61,7 @@ void init_sam_mod(py::module& parent_mod) {
         .def_readwrite("qual",  &ivio::sam::record::qual)
         .def_readwrite("tags",  &ivio::sam::record::tags)
         .def("__repr__", [](ivio::sam::record const& o) -> std::string {
-            return std::string{"ivpy.sam.record:"}
+            return std::string{"iv2py.sam.record:"}
                    + "\n  id: "   + o.qname
                    + "\n  flag:"  + std::to_string(o.flag)
                    + "\n  rname:" + o.rname
