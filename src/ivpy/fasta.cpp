@@ -2,8 +2,6 @@
 #include <pybind11/pybind11.h>
 #include <ranges>
 
-namespace ivio {
-
 template <typename reader>
 struct record_reader {
     reader reader_;
@@ -22,15 +20,20 @@ struct record_reader {
     }
     decltype(init(reader_)) view = init(reader_);
 };
-}
 
 namespace py = pybind11;
 PYBIND11_MODULE(ivpy, mod) {
 
     py::module mod_fasta = mod.def_submodule("fasta");
 
+    // Provding the record class
     py::class_<ivio::fasta::record>(mod_fasta, "record")
-        .def(py::init<>())
+        .def(py::init<>([](std::string id, std::string seq) {
+            return ivio::fasta::record {
+                .id  = std::move(id),
+                .seq = std::move(seq),
+            };
+        }), py::arg("id") = "", py::arg("seq") = "")
         .def_readwrite("id", &ivio::fasta::record::id)
         .def_readwrite("seq", &ivio::fasta::record::seq)
         .def("__repr__", [](ivio::fasta::record const& o) -> std::string {
@@ -38,13 +41,28 @@ PYBIND11_MODULE(ivpy, mod) {
         })
     ;
 
-    py::class_<ivio::record_reader<ivio::fasta::reader>>(mod_fasta, "reader")
-        .def(py::init([](std::string path) {
-            return std::make_unique<ivio::record_reader<ivio::fasta::reader>>(path);
-        }))
-        .def("__iter__", [](ivio::record_reader<ivio::fasta::reader>& r) {
+    // Providing the reader class
+    py::class_<record_reader<ivio::fasta::reader>>(mod_fasta, "reader")
+        .def(py::init([](std::string const& path) {
+            return std::make_unique<record_reader<ivio::fasta::reader>>(path);
+        }), py::arg("file"))
+        .def("__iter__", [](record_reader<ivio::fasta::reader>& r) {
             return py::make_iterator(r.view.begin(), r.view.end());
         }, py::keep_alive<0, 1>())
     ;
+
+    // Providing the writer class
+    py::class_<ivio::fasta::writer>(mod_fasta, "writer")
+        .def(py::init([](std::string const& path) {
+            return std::make_unique<ivio::fasta::writer>(ivio::fasta::writer::config{path});
+        }), py::arg("file"))
+        .def("write", [](ivio::fasta::writer& writer, ivio::fasta::record const& record) {
+            writer.write(record);
+        }, py::arg("record"))
+        .def("close", [](ivio::fasta::writer& writer) {
+            writer.close();
+        })
+    ;
+
 
 }
