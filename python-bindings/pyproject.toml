@@ -1,6 +1,6 @@
 [project]
 name = "iv2py"
-version = "0.3.2"
+version = "0.3.3"
 authors = [
   { name="Simon Gene Gottlieb", email="iv2py.simon@gottliebtfreitag.de" },
 ]
