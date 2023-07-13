@@ -1,6 +1,6 @@
 [submodule "lib/IVio"]
 	path = lib/IVio
-	url = https://github.com/SGSSGene/IVio.git
+	url = https://github.com/iv-project/IVio.git
 [submodule "lib/pybind11"]
 	path = lib/pybind11
 	url = https://github.com/pybind/pybind11.git

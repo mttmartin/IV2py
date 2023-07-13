@@ -3,6 +3,7 @@ docs_dir: docs
 nav:
   - index.md
 use_directory_urls: false
+repo_url: https://github.com/iv-project/IV2py
 theme:
   name: readthedocs
   custom_dir: docs/readthedocs-customization
