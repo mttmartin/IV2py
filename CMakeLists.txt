@@ -11,10 +11,16 @@ set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 if(WIN32)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /bigobj /EHsc -DNOMINMAX")
 else()
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Werror -Wpedantic -Wextra -Wno-stringop-overread")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Werror -Wpedantic -Wextra")
 endif()
 
 project(IV2py)
+
+#!BUG !WORKAROUND gcc 12.2 (used in python-bindings/build.sh) triggers a false warning
+if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-stringop-overread")
+endif()
+
 
 include(cmake/CPM.cmake)
 
