@@ -34,9 +34,9 @@ CPMaddPackage(NAME cereal
         "WITH_WERROR OFF"
     EXCLUDE_FROM_ALL TRUE
 )
-CPMaddPackage("gh:SGSSGene/fmindex-collection#feat/VariableFMIndex")
-CPMaddPackage("gh:iv-project/IVio#main")
-CPMaddPackage("gh:iv-project/IVSigma#main")
+CPMaddPackage("gh:SGSSGene/fmindex-collection#0.2.0")
+CPMaddPackage("gh:iv-project/IVio#0.1.0")
+CPMaddPackage("gh:iv-project/IVSigma#0.1.0")
 CPMaddPackage("gh:pybind/pybind11#v2.11.1")
 
 
