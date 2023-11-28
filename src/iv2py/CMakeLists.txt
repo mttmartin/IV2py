@@ -7,5 +7,12 @@ project(iv2py LANGUAGES CXX)
 pybind11_add_module(${PROJECT_NAME} MODULE
     main.cpp
     fasta.cpp
-    sam.cpp)
-target_link_libraries(${PROJECT_NAME} PRIVATE ivio::ivio)
+    fmindex.cpp
+    sam.cpp
+    sigma.cpp)
+target_link_libraries(${PROJECT_NAME} PRIVATE
+    ivio::ivio
+    ivsigma::ivsigma
+    fmindex-collection::fmindex-collection
+    cereal::cereal
+    )

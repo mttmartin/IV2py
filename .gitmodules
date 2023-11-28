@@ -1,9 +1,0 @@
-# SPDX-FileCopyrightText: 2006-2023, Knut Reinert & Freie Universität Berlin
-# SPDX-FileCopyrightText: 2016-2023, Knut Reinert & MPI für molekulare Genetik
-# SPDX-License-Identifier: CC0-1.0
-[submodule "lib/IVio"]
-	path = lib/IVio
-	url = https://github.com/iv-project/IVio.git
-[submodule "lib/pybind11"]
-	path = lib/pybind11
-	url = https://github.com/pybind/pybind11.git
