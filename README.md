@@ -10,6 +10,7 @@ Wrapper code to bring libraries from the iv-project to python, currently support
 
 - [IVSigma](https://iv-project.github.io/IVSigma/)
 - [IVio](https://iv-project.github.io/IVio/)
+- [fmindex-collection](https://github.com/SGSSGene/fmindex-collection)
 
 ## Documentation/API Reference
 Checkout the [documentation](https://iv-project.github.io/IV2py/) for details on this library.
