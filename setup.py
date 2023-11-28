@@ -25,7 +25,16 @@ PLAT_TO_CMAKE = {
 class CMakeExtension(Extension):
     def __init__(self, name: str, sourcedir: str = "") -> None:
         super().__init__(name, sources=[])
+        print("======================")
+        print("======================")
+        print("======================")
+        print(f"source: {sourcedir}")
+        print(f"source: {Path(sourcedir)}")
+        print(f"source: {Path.cwd()}")
         self.sourcedir = os.fspath(Path(sourcedir).resolve())
+        print(f"source: {self.sourcedir}")
+        os.system("ls")
+
 
 
 class CMakeBuild(build_ext):
@@ -127,6 +136,6 @@ class CMakeBuild(build_ext):
 
 setup(
     name='iv2py',
-    ext_modules=[CMakeExtension("iv2py", "..")],
+    ext_modules=[CMakeExtension("iv2py", ".")],
     cmdclass={"build_ext": CMakeBuild},
 )

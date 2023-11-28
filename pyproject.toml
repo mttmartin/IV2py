@@ -18,3 +18,6 @@ classifiers = [
 
 [project.urls]
 "Homepage" = "https://github.com/iv-project/IV2py"
+
+[tool.cibuildwheel]
+manylinux-x86_64-image = "manylinux_2_28"
