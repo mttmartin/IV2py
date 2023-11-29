@@ -3,7 +3,7 @@
 # SPDX-License-Identifier: CC0-1.0
 [project]
 name = "iv2py"
-version = "0.4.1"
+version = "0.4.2"
 authors = [
   { name="Simon Gene Gottlieb", email="iv2py.simon@gottliebtfreitag.de" },
 ]
@@ -11,10 +11,24 @@ description = "IV2py bioinformatic utilities"
 requires-python = ">=3.7"
 classifiers = [
     "Development Status :: 4 - Beta",
-    "Operating System :: POSIX :: Linux",
     "Natural Language :: English",
     "Topic :: Scientific/Engineering :: Bio-Informatics"
 ]
 
 [project.urls]
 "Homepage" = "https://github.com/iv-project/IV2py"
+
+[tool.cibuildwheel.linux]
+# Use manylinux_2_28 to have a gcc12 compiler
+manylinux-x86_64-image = "manylinux_2_28"
+
+archs = ["x86_64"]
+build = ["cp*-manylinux_*"]
+
+[tool.cibuildwheel.macos]
+archs = ["x86_64"]
+build = ["cp*-macosx_*"]
+
+[tool.cibuildwheel.windows]
+archs = ["AMD64"]
+build = ["cp*"]
