@@ -3,7 +3,7 @@
 # SPDX-License-Identifier: CC0-1.0
 [project]
 name = "iv2py"
-version = "0.4.1"
+version = "0.4.2"
 authors = [
   { name="Simon Gene Gottlieb", email="iv2py.simon@gottliebtfreitag.de" },
 ]
@@ -11,7 +11,6 @@ description = "IV2py bioinformatic utilities"
 requires-python = ">=3.7"
 classifiers = [
     "Development Status :: 4 - Beta",
-    "Operating System :: POSIX :: Linux",
     "Natural Language :: English",
     "Topic :: Scientific/Engineering :: Bio-Informatics"
 ]
