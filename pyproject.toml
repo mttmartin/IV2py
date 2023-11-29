@@ -28,7 +28,8 @@ build = ["cp*-manylinux_*"]
 
 [tool.cibuildwheel.macos]
 archs = ["x86_64"]
-build = ["cp*-macosx_x86_64*"]
+build = ["cp*-macosx_*"]
 
 [tool.cibuildwheel.windows]
 archs = ["AMD64"]
+build = ["cp*"]
