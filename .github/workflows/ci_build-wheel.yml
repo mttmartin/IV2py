@@ -1,7 +1,7 @@
 # SPDX-FileCopyrightText: 2006-2023, Knut Reinert & Freie Universität Berlin
 # SPDX-FileCopyrightText: 2016-2023, Knut Reinert & MPI für molekulare Genetik
 # SPDX-License-Identifier: CC0-1.0
-name: Build
+name: Build Python Binaries
 
 on:
   push:
@@ -22,7 +22,7 @@ jobs:
         with:
           path: repo
 
-      - name: Install tools
+      - name: Install tools (macos-12)
         if: ${{ matrix.os == 'macos-12' }}
         run: |
            echo \"${GITHUB_ACTION}\" \"${GITHUB_REF}\" \"${GITHUB_BASE_REF}\" \"${GITHUB_RUN_NUMBER}\"
@@ -35,17 +35,12 @@ jobs:
            brew update-reset
            brew install --force-bottle --overwrite cmake pkg-config bash
 
-      - name: Setup clang 17
-        if: ${{ matrix.os == 'macos-12' }}
-        run: |
-          source env.sh
-          brew install --force-bottle llvm@17
-          brew link -f llvm@17
-          echo "export CXX=clang++" >> env.sh
-          INSTALL_PREFIX=$(brew --prefix llvm@17)
-          echo "export PATH=\"${INSTALL_PREFIX}/bin:$PATH\"" >> env.sh
-          echo "export LDFLAGS=\"-L${INSTALL_PREFIX}/lib/c++ -Wl,-rpath,${INSTALL_PREFIX}/lib/c++\"" >> env.sh
-
+           brew install --force-bottle llvm@17
+           brew link -f llvm@17
+           echo "export CXX=clang++" >> env.sh
+           INSTALL_PREFIX=$(brew --prefix llvm@17)
+           echo "export PATH=\"${INSTALL_PREFIX}/bin:$PATH\"" >> env.sh
+           echo "export LDFLAGS=\"-L${INSTALL_PREFIX}/lib/c++ -Wl,-rpath,${INSTALL_PREFIX}/lib/c++\"" >> env.sh
 
       # Used to host cibuildwheel
       - uses: actions/setup-python@v3
@@ -53,44 +48,32 @@ jobs:
       - name: Install cibuildwheel
         run: python -m pip install cibuildwheel==2.16.2
 
-
-      - uses: ilammy/msvc-dev-cmd@v1
-        if: ${{ matrix.os == 'windows-2022' }}
-
-      - name: install zlib
+      - name: install zlib (win)
         if: ${{ matrix.os == 'windows-2022' }}
         run: |
           vcpkg integrate install
           vcpkg install zlib zlib:x64-windows
 
-
-
-
-      - name: Build wheels
+      - name: Build wheels (macos12)
         if: ${{ matrix.os == 'macos-12' }}
         run: |
           source env.sh
           cd repo
           python -m cibuildwheel --output-dir wheelhouse
 
-      - name: Build wheels
+      - name: Build wheels (ubuntu)
         if: ${{ matrix.os == 'ubuntu-22.04' }}
         run: |
           cd repo
           python -m cibuildwheel --output-dir wheelhouse
 
-      - name: Build wheels
+      - name: Build wheels (win)
         if: ${{ matrix.os == 'windows-2022' }}
         env:
           CMAKE_ARGS: "-DCMAKE_TOOLCHAIN_FILE=C:/vcpkg/scripts/buildsystems/vcpkg.cmake"
         run: |
           cd repo
           python -m cibuildwheel --output-dir wheelhouse
-
-
-        # to supply options, put them in 'env', like:
-        # env:
-        #   CIBW_SOME_OPTION: value
 
       - uses: actions/upload-artifact@v3
         with:
