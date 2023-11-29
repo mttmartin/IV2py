@@ -14,3 +14,10 @@ Wrapper code to bring libraries from the iv-project to python, currently support
 
 ## Documentation/API Reference
 Checkout the [documentation](https://iv-project.github.io/IV2py/) for details on this library.
+
+## Release
+For release, download the artifacts from the github action workflow and upload them with twine:
+```
+    unzip artifacts.zip
+    twine upload --repository testpypi *.whl --verbose`
+```
