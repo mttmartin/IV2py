@@ -9,7 +9,8 @@ pybind11_add_module(${PROJECT_NAME} MODULE
     fasta.cpp
     fmindex.cpp
     sam.cpp
-    sigma.cpp)
+    sigma.cpp
+    suffixarray.cpp)
 target_link_libraries(${PROJECT_NAME} PRIVATE
     ivio::ivio
     ivsigma::ivsigma
