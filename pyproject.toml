@@ -3,7 +3,7 @@
 # SPDX-License-Identifier: CC0-1.0
 [project]
 name = "iv2py"
-version = "0.4.2"
+version = "0.5.0"
 authors = [
   { name="Simon Gene Gottlieb", email="iv2py.simon@gottliebtfreitag.de" },
 ]
