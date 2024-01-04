@@ -10,6 +10,7 @@ void init_fasta_mod(py::module& mod);
 void init_fmindex_mod(py::module& mod);
 void init_sam_mod(py::module& mod);
 void init_sigma_mod(py::module& mod);
+void init_suffixarray_mod(py::module& mod);
 
 PYBIND11_MODULE(iv2py, mod) {
     //provides conversion from std::string to std::filesystem::path
@@ -21,4 +22,5 @@ PYBIND11_MODULE(iv2py, mod) {
     init_fmindex_mod(mod);
     init_sam_mod(mod);
     init_sigma_mod(mod);
+    init_suffixarray_mod(mod);
 }
