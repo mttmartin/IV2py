@@ -12,6 +12,12 @@ Wrapper code to bring libraries from the iv-project to python, currently support
 - [IVio](https://iv-project.github.io/IVio/)
 - [fmindex-collection](https://github.com/SGSSGene/fmindex-collection)
 
+## Install
+To use the newest `iv2py` package, run:
+```bash
+pip install -U iv2py
+```
+
 ## Documentation/API Reference
 Checkout the [documentation](https://iv-project.github.io/IV2py/) for details on this library.
 
