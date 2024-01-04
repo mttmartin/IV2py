@@ -9,6 +9,7 @@ nav:
     - Bam: formats-bam.md
     - Fasta: formats-fasta.md
   - Indices:
+    - Suffix Array: suffixarray.md
     - FM-Index: fmindex.md
   - Complete Examples:
     - Search with an FM-Index: example-search.md
