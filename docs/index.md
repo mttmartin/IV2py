@@ -9,6 +9,12 @@
 **IV2py** provides python bindings for [IVio](https://github.com/iv-project/IVio), [IVsigma](https://github.com/iv-project/IVSigma) and [fmindex-collection](https://github.com/SGSSGene/fmindex-collection).
 The goal is to cover typical functionality for **bioinformatics** and have a playground on how python bindings for a successor of SeqAn3 and it's binding could look like.
 
+## Installation
+To use the newest `iv2py` package, run:
+```bash
+pip install -U iv2py
+```
+
 ## Support
 
  - **fasta** (rw) + **gzip** (rw)
