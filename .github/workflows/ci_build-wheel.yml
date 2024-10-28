@@ -42,36 +42,21 @@ jobs:
            echo "export PATH=\"${INSTALL_PREFIX}/bin:$PATH\"" >> env.sh
            echo "export LDFLAGS=\"-L${INSTALL_PREFIX}/lib/c++ -Wl,-rpath,${INSTALL_PREFIX}/lib/c++\"" >> env.sh
 
+      - name: Install tools (win)
+        if: ${{ matrix == 'windows-2022' }}
+        run: |
+          echo "CMAKE_ARGS=-DCMAKE_TOOLCHAIN_FILE=C:/vcpkg/scripts/buildsystems/vcpkg.cmake" >> env.sh
+
       # Used to host cibuildwheel
       - uses: actions/setup-python@v3
 
       - name: Install cibuildwheel
         run: python -m pip install cibuildwheel==2.16.2
 
-      - name: install zlib (win)
-        if: ${{ matrix.os == 'windows-2022' }}
-        run: |
-          vcpkg integrate install
-          vcpkg install zlib zlib:x64-windows
-
-      - name: Build wheels (macos13)
-        if: ${{ matrix.os == 'macos-13' }}
+      - name: Build wheels
+        if: ${{ matrix.os == 'macos-13' || matrix.os == 'ubuntu-22.04' }}
         run: |
           source env.sh
-          cd repo
-          python -m cibuildwheel --output-dir wheelhouse
-
-      - name: Build wheels (ubuntu)
-        if: ${{ matrix.os == 'ubuntu-22.04' }}
-        run: |
-          cd repo
-          python -m cibuildwheel --output-dir wheelhouse
-
-      - name: Build wheels (win)
-        if: ${{ matrix.os == 'windows-2022' }}
-        env:
-          CMAKE_ARGS: "-DCMAKE_TOOLCHAIN_FILE=C:/vcpkg/scripts/buildsystems/vcpkg.cmake"
-        run: |
           cd repo
           python -m cibuildwheel --output-dir wheelhouse
 
