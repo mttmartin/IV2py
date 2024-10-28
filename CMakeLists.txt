@@ -1,7 +1,7 @@
 # SPDX-FileCopyrightText: 2006-2023, Knut Reinert & Freie Universität Berlin
 # SPDX-FileCopyrightText: 2016-2023, Knut Reinert & MPI für molekulare Genetik
 # SPDX-License-Identifier: CC0-1.0
-cmake_minimum_required (VERSION 3.14)
+cmake_minimum_required (VERSION 3.25)
 
 # Set compiler options (we know this is not used as a library)
 set(CMAKE_CXX_STANDARD 20)
@@ -22,22 +22,9 @@ if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
 endif()
 
 
+find_package(OpenMP QUIET)
 include(cmake/CPM.cmake)
-
-CPMaddPackage(NAME cereal
-    GITHUB_REPOSITORY USCiLab/cereal
-    GIT_TAG v1.3.2
-    OPTIONS
-        "SKIP_PERFORMANCE_COMPARISON ON"
-        "BUILD_SANDBOX OFF"
-        "BUILD_DOC OFF"
-        "WITH_WERROR OFF"
-    EXCLUDE_FROM_ALL TRUE
-)
-CPMaddPackage("gh:SGSSGene/fmindex-collection#0.2.0")
-CPMaddPackage("gh:iv-project/IVio#0.1.0")
-CPMaddPackage("gh:iv-project/IVSigma#0.1.0")
-CPMaddPackage("gh:pybind/pybind11#v2.11.1")
-
+CPMAddPackage("gh:SGSSGene/cpm.dependencies@1.0.0")
+CPMLoadDependenciesFile("${CMAKE_CURRENT_SOURCE_DIR}/cpm.dependencies")
 
 add_subdirectory(src/iv2py)

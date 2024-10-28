@@ -1,0 +1,36 @@
+{
+  "format_version": "1",
+  "packages": [
+    {
+      "name": "fmindex-collection",
+      "version": "0.4.3",
+      "github_repository": "SGSSGene/fmindex-collection",
+    },
+    {
+      "name": "ivio",
+      "version": "0.4.2",
+      "github_repository": "iv-project/IVio"
+    },
+    {
+      "name": "ivsigma",
+      "version": "0.2.1",
+      "github_repository": "iv-project/IVSigma"
+    },
+    {
+      "name": "cereal",
+      "version": "1.3.2",
+      "github_repository": "USCiLab/cereal",
+      "options": [
+        "BUILD_DOC OFF",
+        "BUILD_SANDBOX OFF",
+        "SKIP_PERFORMANCE_COMPARISON ON",
+        "WITH_WERROR OFF"
+      ]
+    },
+    {
+        "name": "pybind11",
+        "version": "2.13.6",
+        "github_repository": "pybind/pybind11"
+    }
+  ]
+}

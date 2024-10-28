@@ -10,10 +10,12 @@ pybind11_add_module(${PROJECT_NAME} MODULE
     fmindex.cpp
     sam.cpp
     sigma.cpp
-    suffixarray.cpp)
+    suffixarray.cpp
+)
 target_link_libraries(${PROJECT_NAME} PRIVATE
     ivio::ivio
     ivsigma::ivsigma
     fmindex-collection::fmindex-collection
     cereal::cereal
-    )
+)
+target_compile_features(${PROJECT_NAME} PUBLIC cxx_std_20)
