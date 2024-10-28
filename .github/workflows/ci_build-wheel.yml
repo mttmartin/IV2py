@@ -15,15 +15,15 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-22.04, windows-2022, macos-12]
+        os: [ubuntu-22.04, windows-2022, macos-13]
 
     steps:
       - uses: actions/checkout@v4
         with:
           path: repo
 
-      - name: Install tools (macos-12)
-        if: ${{ matrix.os == 'macos-12' }}
+      - name: Install tools (macos-13)
+        if: ${{ matrix.os == 'macos-13' }}
         run: |
            echo \"${GITHUB_ACTION}\" \"${GITHUB_REF}\" \"${GITHUB_BASE_REF}\" \"${GITHUB_RUN_NUMBER}\"
            echo 'eval "$(brew shellenv)"' > env.sh
@@ -54,8 +54,8 @@ jobs:
           vcpkg integrate install
           vcpkg install zlib zlib:x64-windows
 
-      - name: Build wheels (macos12)
-        if: ${{ matrix.os == 'macos-12' }}
+      - name: Build wheels (macos13)
+        if: ${{ matrix.os == 'macos-13' }}
         run: |
           source env.sh
           cd repo
