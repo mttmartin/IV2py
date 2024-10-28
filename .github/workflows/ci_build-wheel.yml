@@ -22,10 +22,16 @@ jobs:
         with:
           path: repo
 
+
+      - name: Setup Env
+        run: |
+           echo \"${GITHUB_ACTION}\" \"${GITHUB_REF}\" \"${GITHUB_BASE_REF}\" \"${GITHUB_RUN_NUMBER}\"
+           echo "" > env.sh
+
+
       - name: Install tools (macos-13)
         if: ${{ matrix.os == 'macos-13' }}
         run: |
-           echo \"${GITHUB_ACTION}\" \"${GITHUB_REF}\" \"${GITHUB_BASE_REF}\" \"${GITHUB_RUN_NUMBER}\"
            echo 'eval "$(brew shellenv)"' > env.sh
            echo "Setup for " ${{ inputs.compiler }}
            echo "export CXX_STANDARD=cpp20" >> env.sh
