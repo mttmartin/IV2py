@@ -3,18 +3,17 @@
   "packages": [
     {
       "name": "fmindex-collection",
-      "version": "0.4.2.1",
+      "version": "0.4.3",
       "github_repository": "SGSSGene/fmindex-collection",
-      "git_tag": "9e163f5a867ad0f680b5a1f27c48a2a6a4bb7119"
     },
     {
       "name": "ivio",
-      "version": "0.4.1",
+      "version": "0.4.2",
       "github_repository": "iv-project/IVio"
     },
     {
       "name": "ivsigma",
-      "version": "0.2.0",
+      "version": "0.2.1",
       "github_repository": "iv-project/IVSigma"
     },
     {
