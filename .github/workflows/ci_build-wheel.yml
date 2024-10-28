@@ -66,6 +66,6 @@ jobs:
           cd repo
           python -m cibuildwheel --output-dir wheelhouse
 
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         with:
           path: ./repo/wheelhouse/*.whl
