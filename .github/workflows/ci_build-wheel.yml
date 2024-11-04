@@ -68,4 +68,5 @@ jobs:
 
       - uses: actions/upload-artifact@v4
         with:
+          name: binaries-${{ github.sha }}-${{ matrix.os }}
           path: ./repo/wheelhouse/*.whl
