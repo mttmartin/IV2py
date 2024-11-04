@@ -39,6 +39,8 @@ jobs:
            brew update-reset
            brew install --force-bottle --overwrite cmake pkg-config bash
 
+           echo "export MACOSX_DEPLOYMENT_TARGET=13.6" >> env.sh
+
            brew install --force-bottle llvm@17
            brew link -f llvm@17
            echo "export CXX=clang++" >> env.sh
