@@ -5,6 +5,7 @@
 
 #include <ivio/ivio.h>
 #include <pybind11/pybind11.h>
+#include <pybind11/stl/filesystem.h>
 
 namespace py = pybind11;
 void init_fasta_mod(py::module& parent_mod) {
@@ -27,7 +28,7 @@ void init_fasta_mod(py::module& parent_mod) {
 
     // Providing the reader class
     py::class_<record_reader<ivio::fasta::reader>>(mod, "reader")
-        .def(py::init([](std::string const& path) {
+        .def(py::init([](std::filesystem::path const& path) {
             return std::make_unique<record_reader<ivio::fasta::reader>>(path);
         }), py::arg("file"))
         .def("__iter__", [](record_reader<ivio::fasta::reader>& r) {
@@ -37,7 +38,7 @@ void init_fasta_mod(py::module& parent_mod) {
 
     // Providing the writer class
     py::class_<ivio::fasta::writer>(mod, "writer")
-        .def(py::init([](std::string const& path) {
+        .def(py::init([](std::filesystem::path const& path) {
             return std::make_unique<ivio::fasta::writer>(ivio::fasta::writer::config{path});
         }), py::arg("file"))
         .def("write", [](ivio::fasta::writer& writer, ivio::fasta::record const& record) {
