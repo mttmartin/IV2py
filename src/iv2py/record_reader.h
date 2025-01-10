@@ -3,14 +3,14 @@
 // SPDX-License-Identifier: BSD-3-Clause
 #pragma once
 
-#include <string>
+#include <filesystem>
 #include <ranges>
 
 template <typename reader>
 struct record_reader {
     reader reader_;
 
-    record_reader(std::string const& path)
+    record_reader(std::filesystem::path const& path)
         : reader_{{path}}
     {}
 
