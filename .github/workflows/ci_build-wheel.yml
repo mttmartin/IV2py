@@ -15,7 +15,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-22.04, windows-2022, macos-13]
+        os: [ubuntu-22.04, windows-2022, macos-13, macos-14]
 
     steps:
       - uses: actions/checkout@v4
@@ -44,6 +44,28 @@ jobs:
            brew install --force-bottle llvm@17
            brew link -f llvm@17
            echo "export CXX=clang++" >> env.sh
+           INSTALL_PREFIX=$(brew --prefix llvm@17)
+           echo "export PATH=\"${INSTALL_PREFIX}/bin:$PATH\"" >> env.sh
+           echo "export LDFLAGS=\"-L${INSTALL_PREFIX}/lib/c++ -Wl,-rpath,${INSTALL_PREFIX}/lib/c++\"" >> env.sh
+      - name: Install tools (macos-14)
+        if: ${{ matrix.os == 'macos-14' }}
+        shell: bash
+        run: |
+           echo 'eval "$(brew shellenv)"' > env.sh
+           echo "Setup for " ${{ inputs.compiler }}
+           echo "export CXX_STANDARD=cpp20" >> env.sh
+           echo "export BUILD_TYPE=Release" >> env.sh
+           echo "export CMAKE_CXX_FLAGS=\"-fuse-ld=lld -Wno-unused-command-line-argument\"" >> env.sh
+           echo "export CMAKE_C_FLAGS=" >> env.sh
+           brew update-reset
+           brew install --force-bottle --overwrite cmake pkg-config bash
+
+           echo "export MACOSX_DEPLOYMENT_TARGET=14.0" >> env.sh
+
+           brew install --force-bottle llvm@17
+           brew link -f llvm@17
+           echo "export CXX=clang++" >> env.sh
+           echo "export CC=clang" >> env.sh
            INSTALL_PREFIX=$(brew --prefix llvm@17)
            echo "export PATH=\"${INSTALL_PREFIX}/bin:$PATH\"" >> env.sh
            echo "export LDFLAGS=\"-L${INSTALL_PREFIX}/lib/c++ -Wl,-rpath,${INSTALL_PREFIX}/lib/c++\"" >> env.sh

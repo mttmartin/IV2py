@@ -37,8 +37,10 @@ class CMakeBuild(build_ext):
         # Using this requires trailing slash for auto-detection & inclusion of
         # auxiliary "native" libs
 
-        debug = int(os.environ.get("DEBUG", 0)) if self.debug is None else self.debug
-        cfg = "Debug" if debug else "Release"
+        BUILD_TYPE = os.environ.get("BUILD_TYPE", "Debug")
+        CMAKE_CXX_FLAGS = os.environ.get("CMAKE_CXX_FLAGS", "")
+        CMAKE_C_FLAGS = os.environ.get("CMAKE_C_FLAGS", "")
+        CMAKE_CXX_STANDARD = os.environ.get("CXX_STANDARD", "")
 
         # CMake lets you override the generator - we need to check this.
         # Can be set with Conda-Build, for example.
@@ -50,7 +52,10 @@ class CMakeBuild(build_ext):
         cmake_args = [
             f"-DCMAKE_LIBRARY_OUTPUT_DIRECTORY={extdir}{os.sep}",
             f"-DPYTHON_EXECUTABLE={sys.executable}",
-            f"-DCMAKE_BUILD_TYPE={cfg}",  # not used on MSVC, but no harm
+            f"-DCMAKE_BUILD_TYPE={BUILD_TYPE}",
+            f"-DCMAKE_CXX_FLAGS={CMAKE_CXX_FLAGS}",
+            f"-DCMAKE_C_FLAGS={CMAKE_C_FLAGS}",
+            f"-DCMAKE_CXX_STANDARD={CMAKE_CXX_STANDARD}"
         ]
         build_args = []
         # Adding CMake arguments set as environment variable
@@ -95,9 +100,9 @@ class CMakeBuild(build_ext):
             # Multi-config generators have a different way to specify configs
             if not single_config:
                 cmake_args += [
-                    f"-DCMAKE_LIBRARY_OUTPUT_DIRECTORY_{cfg.upper()}={extdir}"
+                    f"-DCMAKE_LIBRARY_OUTPUT_DIRECTORY_{BUILD_TYPE.upper()}={extdir}"
                 ]
-                build_args += ["--config", cfg]
+                build_args += ["--config", BUILD_TYPE]
 
         if sys.platform.startswith("darwin"):
             # Cross-compile support for macOS - respect ARCHFLAGS if set
@@ -121,8 +126,10 @@ class CMakeBuild(build_ext):
         subprocess.run(
             ["cmake", ext.sourcedir, *cmake_args], cwd=build_temp, check=True
         )
+        my_env = os.environ.copy()
+        my_env["VERBOSE"]="1"
         subprocess.run(
-            ["cmake", "--build", ".", *build_args], cwd=build_temp, check=True
+            ["cmake", "--build", ".", *build_args], cwd=build_temp, check=True, env=my_env
         )
 
 setup(
