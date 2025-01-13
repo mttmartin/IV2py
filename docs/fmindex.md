@@ -26,6 +26,9 @@ An FM-Index is a data structure that supports fast searches for exact searches.
 
     result = index.search("CG")
     print(result)
+
+    """search with errors"""
+    result2 = index.search("CG", k=1);
     ```
 
     *Output*:
@@ -52,6 +55,9 @@ An FM-Index is a data structure that supports fast searches for exact searches.
 
     result = index.search("CG")
     print(result)
+
+    """search with errors"""
+    result2 = index.search("CG", k=1);
     ```
 
     *Output*:

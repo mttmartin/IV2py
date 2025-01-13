@@ -30,6 +30,9 @@ else:
 # search through fmindex
 res = index.search("CG")
 print(res)
+
+# search through fmindex with errors
+res2 = index.search("CG", k=1)
 ```
 
 *file.fasta*:
