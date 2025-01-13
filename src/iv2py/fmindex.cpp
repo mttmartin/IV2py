@@ -32,9 +32,9 @@ void init_fmindex_mod(py::module& mod) {
             archive(index);
             return index;
         }), py::arg("path"))
-        .def("search", [](Index const& index, std::string const& query) -> std::vector<std::tuple<size_t, size_t>> {
-            return index.search(query);
-        }, py::arg("query"))
+        .def("search", [](Index const& index, std::string const& query, size_t k) -> std::vector<std::tuple<size_t, size_t>> {
+            return index.search(query, k);
+        }, py::arg("query"), py::arg("k") = 0)
         .def("load", [](Index& index, std::filesystem::path path) {
             auto ifs     = std::ifstream{path, std::ios::binary};
             auto archive = cereal::BinaryInputArchive{ifs};
