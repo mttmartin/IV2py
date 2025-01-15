@@ -44,6 +44,13 @@ jobs:
           cmake_flags: ${{ matrix.cmake_flags }}
           cmake_c_flags: ${{ matrix.cmake_c_flags }}
           cmake_cxx_flags: ${{ matrix.cmake_cxx_flags }}
+      - uses: actions/setup-python@v5
+        with:
+          python-version: 'pypy3.7'
+      - name: Install in Python
+        run: pip install '.[test]'
+      - name: Test
+        run: pytest tests/
   final:
     runs-on: ubuntu-22.04
     name: final-pass
