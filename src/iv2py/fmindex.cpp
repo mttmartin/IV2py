@@ -6,6 +6,7 @@
 #include <fstream>
 #include <pybind11/pybind11.h>
 #include <pybind11/stl.h>
+#include <pybind11/stl/filesystem.h>
 #include <sstream>
 
 #include <cereal/archives/binary.hpp>
@@ -35,12 +36,12 @@ void init_fmindex_mod(py::module& mod) {
         .def("search", [](Index const& index, std::string const& query, size_t k) -> std::vector<std::tuple<size_t, size_t>> {
             return index.search(query, k);
         }, py::arg("query"), py::arg("k") = 0)
-        .def("load", [](Index& index, std::filesystem::path path) {
+        .def("load", [](Index& index, std::filesystem::path const& path) {
             auto ifs     = std::ifstream{path, std::ios::binary};
             auto archive = cereal::BinaryInputArchive{ifs};
             archive(index);
         }, py::arg("path"))
-        .def("save", [](Index& index, std::filesystem::path path) {
+        .def("save", [](Index& index, std::filesystem::path const& path) {
             auto ofs     = std::ofstream{path, std::ios::binary};
             auto archive = cereal::BinaryOutputArchive{ofs};
             archive(index);
