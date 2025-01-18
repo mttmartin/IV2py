@@ -46,7 +46,7 @@ jobs:
           cmake_cxx_flags: ${{ matrix.cmake_cxx_flags }}
       - uses: actions/setup-python@v5
         with:
-          python-version: 'pypy3.7'
+          python-version: 'pypy3.8'
       - name: Install package in Python with testing dependencies
         working-directory: ./repo
         run: pip install '.[test]'
