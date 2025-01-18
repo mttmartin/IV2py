@@ -41,9 +41,9 @@ jobs:
         with:
           python-version: 'pypy3.7'
       - name: Install in Python
-        run: PYTHONPATH=repo/build/src/iv2py pip install '.[test]'
+        run: PYTHONPATH=/home/runner/work/IV2py/IV2py/repo pip install '.[test]'
       - name: Test
-        run: PYTHONPATH=repo/build/src/iv2py pytest tests/
+        run: PYTHONPATH=/home/runner/work/IV2py/IV2py/repo pytest tests/
   final:
     runs-on: ubuntu-22.04
     name: final-pass
