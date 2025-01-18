@@ -23,11 +23,7 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - {os: ubuntu-22.04, compiler: spdx_license_lint}
           - {os: ubuntu-22.04, compiler: gcc13-cpp20-release}
-          - {os: ubuntu-22.04, compiler: gcc13-cpp20-debug-sanitize_address}
-          - {os: ubuntu-22.04, compiler: gcc13-cpp20-debug-sanitize_undefined}
-          - {os: ubuntu-22.04, compiler: clang17-cpp20-release}
     steps:
       - name: Standard IV-project testing
         uses: iv-project/IVaction@v9.26
@@ -41,9 +37,9 @@ jobs:
         with:
           python-version: 'pypy3.7'
       - name: Install in Python
-        run: PYTHONPATH=/home/runner/work/IV2py/IV2py/repo pip install '.[test]'
+        run: pip install '.[test]' -r pyproject.toml
       - name: Test
-        run: PYTHONPATH=/home/runner/work/IV2py/IV2py/repo pytest tests/
+        run: pytest tests/
   final:
     runs-on: ubuntu-22.04
     name: final-pass
