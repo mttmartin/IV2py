@@ -39,7 +39,7 @@ jobs:
       - name: Install in Python
         run: pip install pytest
       - name: Test
-        run: pytest tests/
+        run: pytest ./repo/tests/
   final:
     runs-on: ubuntu-22.04
     name: final-pass
