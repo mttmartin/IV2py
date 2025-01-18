@@ -37,7 +37,8 @@ jobs:
         with:
           python-version: 'pypy3.7'
       - name: Install in Python
-        run: pip install '.[test]' -r ./repo/pyproject.toml
+        working-directory: ./repo
+        run: pip install '.[test]'
       - name: Test
         run: pytest ./repo/tests/
   final:
