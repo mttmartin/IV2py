@@ -47,10 +47,11 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: 'pypy3.7'
-      - name: Install in Python
+      - name: Install package in Python with testing dependencies
+        working-directory: ./repo
         run: pip install '.[test]'
-      - name: Test
-        run: pytest tests/
+      - name: Test in Python
+        run: pytest ./repo/tests/
   final:
     runs-on: ubuntu-22.04
     name: final-pass
