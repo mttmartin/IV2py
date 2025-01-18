@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2025 Matthew Martin <matthew@mttmartin.com>
+# SPDX-License-Identifier: MIT
+
 import pytest
 
 import iv2py as iv
