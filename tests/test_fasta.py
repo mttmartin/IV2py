@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2025 Matthew Martin <matthew@mttmartin.com>
+# SPDX-License-Identifier: MIT
+
 import iv2py as iv
 
 def test_fasta_read(tmp_path):
