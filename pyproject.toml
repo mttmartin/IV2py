@@ -18,6 +18,9 @@ classifiers = [
 [project.urls]
 "Homepage" = "https://github.com/iv-project/IV2py"
 
+[project.optional-dependencies]
+test = ["pytest"]
+
 [tool.cibuildwheel.linux]
 # Use manylinux_2_28 to have a gcc12 compiler
 manylinux-x86_64-image = "manylinux_2_28"
